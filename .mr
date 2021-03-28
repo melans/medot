@@ -1,0 +1,511 @@
+################################################################################
+################################################################################
+################################################################################
+##System
+#alias src='nano ~/.bash_aliases;source ~/.bash_aliases'
+#alias src='rsync -azP anssary@grex.org:~/.bash_aliases ~/.;nano ~/.bash_aliases;rsync -azP ~/.bash_aliases anssary@grex.org:~/.bash_aliases'
+##find non-duplicates
+#awk 'NR==FNR{split($0,x,"=");y[x[1]]=$0}NR>FNR{split($0,z,"=");if(!y[z[1]])print $0}' .bash_aliases aliases | sort | less
+
+#function mr1 () {
+#  mrkey="1ZjgeznbtAcQoA9seedJsB-vX-7cc_lU2"
+#  CONFIRM=$(wget --quiet --save-cookies ~/.trash/cookies.txt --keep-session-cookies --no-check-certificate "https://docs.google.com/uc?export=download&id=$mrkey" -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')
+#  wget --load-cookies ~/.trash/cookies.txt "https://docs.google.com/uc?export=download&confirm=$CONFIRM&id=$mrkey" -O ~/.ssh/mr
+#  del ~/.trash/cookies.txt
+#  chmod 600 ~/.ssh/mr
+#}
+
+#srcx=""
+#src0="u170-n39suvtkypze@giowm1057.siteground.biz"
+#src0="u1353-uxh2uv28eepk@giow1031.siteground.us"
+#srcx="-e 'ssh -i ~/.ssh/mr -p18765'"
+
+
+# Triton
+#src0="elan@ssh.blinkenshell.org"
+#src00="elan@triton"
+#srcp="2222"
+
+#[[ "$src00"="`whoami`@`hostname`" ]] || rsync -azP $src0:~/.mr ~/. -e "ssh -p$srcp";
+#alias src='_(){ case "$src00" in "`whoami`@`hostname`"*) nano ~/.mr;;*) rsync -azP $src0:~/.mr ~/. -e "ssh -p$srcp" && rsync -azP $src0:~/.ssh/config ~/.ssh/. -e "ssh -p$srcp" && nano ~/.mr && rsync -azP ~/.mr $src0:~/.mr -e "ssh -p$srcp";;esac;source ~/.mr;};_'
+#alias src1='_(){ case "$src00" in "`whoami`@`hostname`"*) echo "This is $src0";;*) rsync -azP $src0:~/.mr ~/. -e "ssh -p$srcp" && rsync -azP $src0:~/.ssh/config ~/.ssh/. -e "ssh -p$srcp";;esac;source ~/.mr;};_'
+#alias rsrc='echo src0=\"$src0\" srcp=\"$srcp\" && alias src src1'
+
+
+# Grex.org
+#src0="anssary@grex.org"
+#srcp="22"
+#if [[ "$src0" != "`whoami`@`hostname`" ]]; then rsync -azP $src0:~/.mr ~/.;fi
+
+#alias src='_(){ case "$src0" in "`whoami`@`hostname`"*) nano ~/.mr;;*) rsync -azP $src0:~/.mr ~/. && rsync -azP $src0:~/.ssh/config ~/.ssh/. && nano ~/.mr && rsync -azP ~/.mr $src0:~/.mr;;esac;source ~/.mr;};_'
+#alias src1='_(){ case "$src0" in "`whoami`@`hostname`"*) echo "This is $src0";;*) rsync -azP $src0:~/.mr ~/. && rsync -azP $src0:~/.ssh/config ~/.ssh/.;;esac;source ~/.mr;};_'
+#alias rsrc='echo src0=\"$src0\" srcp=\"$srcp\" && alias src src1 && echo src1'
+
+# HAT
+src0="hat@136.243.23.230"
+srcp="22"
+src00="hat@chat.healthatec.com"
+#if [[ "$src00" != "`whoami`@`hostname`" ]]; then rsync -azP $src0:~/.mr ~/.;fi
+
+alias src='_(){ case "$src0" in "`whoami`@`hostname`"*) nano ~/.mr;;*) rsync -azP $src0:~/.mr ~/. && rsync -azP $src0:~/.ssh/config ~/.ssh/. && nano ~/.mr && rsync -azP ~/.mr $src0:~/.mr;;esac;source ~/.mr;};_'
+alias src1='_(){ case "$src0" in "`whoami`@`hostname`"*) echo "This is $src0";;*) rsync -azP $src0:~/.mr ~/. && rsync -azP $src0:~/.ssh/config ~/.ssh/.;;esac;source ~/.mr;};_'
+alias rsrc='echo src0=\"$src0\" srcp=\"$srcp\" && alias src src1 && echo src1'
+
+
+
+
+
+#if [ $srcd!=true ]; then srcd=true && src1;fi
+
+if [[ "`tail -1 ~/.bashrc`" != ". ~/.mr" ]]; then echo ". ~/.mr">>~/.bashrc;fi
+
+#src1
+
+#alias src='rsync -azP anssary@grex.org:/a/n/anssary/.bash_aliases ~/.;source ~/.bash_aliases'
+#alias upsrc='rsync -azP anssary@grex.org:/a/n/anssary/.bash_aliases ~/.;nano ~/.bash_aliases;rsync -azP ~/.bash_aliases anssary@grex.org:/a/n/anssary/.bash_aliases;source ~/.bash_aliases'
+
+HISTSIZE=
+HISTFILESIZE=
+HISTCONTROL=ignoredups
+HISTTIMEFORMAT='%y%m%d.%H%M%S => '
+alias hh='history|less'
+alias uu='_(){ case "`hostname`" in *stampede2*|*cheyenne3*|*hpcc2*|*tamuk*|*siteground*) echo "Not sudo";;*healthatec*) sudo yum update;sudo yum upgrade -y;sudo yum autoremove -y;;*) sudo apt update;sudo apt -f install -y;sudo apt upgrade -y --allow-downgrades;sudo apt dist-upgrade -y --allow-downgrades;sudo apt autoremove -y;sudo apt autoclean -y;;esac;};_'
+alias pstre='ps jexfU $UID'
+alias pstree='ps jexfU $UID'
+alias treeps='_(){ if [ -z "$1" ]; then echo "Usage: treeps <process name>"; else watch -n.1 ps f -g`ps eo ppid -C $1 --no-header`; fi;};_'
+
+PS1='\[\033[01;97m\]\#.\!.\D{%y%m%d.%H%M%S} \[\033[01;33m\]\u@\h\[\033[00m\] \[\033[01;36m\]\w \$\[\033[0m\] '
+
+alias cd..='cd ..'
+alias stp='sudo apt install -y '
+alias torr='sudo service tor restart'
+
+# Drawing
+bx=$( echo -n "\\n" && printf "%.s━" {1..80} && echo -n "\\n%s\\n" && printf "%.s═" {1..80} && echo -n "\\n" )
+alias box='_(){ printf $bx "$*";};_'
+
+
+## Files
+
+alias ducks='du -cks -- * | sort -rn | head'
+
+alias findme='_(){ nohup find `pwd` -iname "*$1*" -printf "%T+ %p\n"|sort -rnk1|mail -s "find `whoami`@`hostname`:`pwd` -iname \"*$1*\" -printf \"%T+ %p\n\"|sort -rnk1" anssary@gmail.com &};_'
+alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+
+alias now='date +"%Z_%F_%T"'
+alias mkdir='mkdir -pv'
+
+alias mkcd='_(){ mkdir "$1" && cd "$1";};_'
+alias bkp='_(){ mkdir .bkp;cp -vur --backup=numbered "$@" .bkp/.;};_'
+alias bkpb='tar czf ~/bash.bkp.tgz ~/.bashrc ~/.mr ~/.bash_history;mail -s "Bash BKP of $USER@$HOSTNAME" -a ~/bash.bkp.tgz anssary+BashBKP@gmail.com</dev/null;'
+alias swap='_(){ local TMPFILE=tmp.$$; mv "$1" $TMPFILE; mv "$2" "$1"; mv $TMPFILE "$2";};_'
+alias extract='_(){ if [ -f $1 ]; then case $1 in *.tar.bz2) tar xjf $1; *.tar.gz) tar xzf $1; *.tgz) tar xzf $1; *.bz2) bunzip2 $1; *.rar) unrar x $1; *.gz) gunzip $1; *.tar) tar xf $1; *.tbz2) tar xjf $1; *.zip) unzip$1; *.Z) uncompress $1; *.7z) 7z x $1; *) echo "dont know how to extract $1 ..."; esac else echo "$1 is not a valid file!" fi;};_'
+alias rm='echo "This is not the command you are looking for, use del instead. If you insist then use:";echo "\\rm file_name";false'
+# del(){ case "`hostname`" in *stampede2.tacc.utexas.edu*)t="/work/03368/melans";;*cheyenne3*)t="/glade/work/elansary";;*)t="~";;esac;mkdir -p $t/.trash;mv --verbose -f --backup=numbered --target-directory $t/.trash $1; }
+alias del='_(){ case "`hostname`" in *stampede2*)t="/work/03368/melans";;*cheyenne3*)t="/glade/work/elansary";;*)t=$HOME;;esac;mkdir -p $t/.trash;mv --verbose -f --backup=numbered --target-directory $t/.trash "$@";};_'
+
+alias les='less -BIJMNS "$@"'
+alias l.='ls -d .* --color=auto'
+alias ll='ls -al --color=auto '
+alias ll='ls -al '
+alias lll='ll -h'
+alias lt='_(){ if [ -z "$1" ]; then f=".";else f=$1;fi;tree -DFfhpQ --timefmt "%Y-%m-%d %H:%M" $f ;};_'
+alias lst='lt|les'
+
+alias hdr='_(){ awk '\''NR<2{for(;++i<=NF;)print i," : ",$i}'\'' $1;};_'
+alias hdrc='_(){ awk -F, '\''NR<2{for(;++i<=NF;)print i," : ",$i}'\'' $1;};_'
+alias header='_(){ awk '\''NR<2{for(;++i<=NF;)print i," : ",$i}'\'' $1;};_'
+alias headerc='_(){ awk -F, '\''NR<2{for(;++i<=NF;)print i," : ",$i}'\'' $1;};_'
+alias htop='htop -u $USER '
+
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+alias mp3='youtube-dl -x --audio-format mp3 --audio-quality 0 '
+alias mp3s='mp3 -o "%(playlist_index)s.%(ext)s" '
+################################################################################
+# Drupal
+alias d='drush'
+alias dc='echo 1|d cache-clear;echo 2|d cache-clear'
+#alias dc='echo 2|d cache-clear'
+alias dd='sudo dd status=progress '
+alias den='d -y en'
+alias dis='d -y dis'
+alias dl='d -y dl'
+alias dlang='d l10n-update-refresh;d l10n-update --mode=overwrite'
+alias dles='d pml|less'
+alias dll='d pml|grep '
+alias dls='d pml|grep '
+alias dls0='_(){ if [[ -z "$1" ]] ; then x="less"; else x="grep $1"; fi; d pml --status="disabled,not installed"|$x;};_'
+alias dls1='_(){ if [[ -z "$1" ]] ; then x="less"; else x="grep $1"; fi; d pml --status="enabled"|$x;};_'
+alias dme='dis overlay toolbar shortcut comment;dl -y module_filter admin_menu advanced_help;den admin_menu_toolbar module_filter advanced_help;d vset admin_theme seven;'
+alias dperms='d php-eval "node_access_rebuild();"'
+alias dsql='`d sql-connect`'
+alias dstng='chmod 644 sites/default/settings.php;nano sites/default/settings.php;chmod 444 sites/default/settings.php;'
+alias duph='dh -y up drupal;dh -y upc;dh -y updb;'
+alias dnu='dl drupal-7 --drupal-project-rename=. && mv sites .. && ln -s ../sites sites && mkdir -m 777 sites/default/files && cp sites/default/default.settings.php sites/default/settings.php && chmod 666 sites/default/settings.php;'
+alias dup='dc;d -y up drupal;d -y upc;d -y updb'
+alias phpinfo='php -i|les'
+alias dbkp='w && d bb archive me_google_drive default'
+
+alias perms='cd /home/hat/www/www.healthatec.com/www;sudo chown -R hat:apache .;find . -type d -exec sudo chmod u=rwx,g=rwx,o= '{}' \;;find . -type f -exec sudo chmod u=rw,g=rw,o= '{}' \;'
+# alias dfix='sudo bash /home/hat/fix-permissions.sh --drupal_path=/home/hat/www/healthatec.com/public_html --drupal_user=hat'
+
+
+
+################################################################################
+# Python
+alias conda='~/anaconda3/condabin/conda'
+
+# PhD
+
+#alias forcmap='for f in *.forc;do awk '\''NR==1||NF>1&&$1!~/[0-9]/{print NR"\t"$0}'\'' $f > $f.map;done && ll *.map'
+#alias forcmap='for f in *.forc;do sed "s/\\r//g" $f | awk '\''BEGIN{printf "'\''$bx'\''","first series header of each variable"}NR==1||NF>2&&$2==1{print NR"\t"$0}END{print NR"\tLines Total"}'\'' $f > $f.map && awk '\''BEGIN{printf "'\''$bx'\''","first and last series header of each variable"}NR==1||NF>2{if($2==1){print r"\t"L"\n"NR"\t"$0}else{L=$0;n=$2;r=NR}}END{print NR"\tLines Total"}'\'' $f >> $f.map && awk '\''BEGIN{printf "'\''$bx'\''","full Map"}NR==1||NF>1&&$1!~/[0-9]/{print NR"\t"$0}END{print NR"\tLines Total"}'\'' $f >> $f.map && awk '\''BEGIN{printf "'\''$bx'\''","first series (full) of each variable"}NR==1;NF>2&&$2==1,NF==0;END{print NR"\tLines Total"}'\'' >> $f.map;done && ll *.map'
+#alias forcmap='for f in *.forc;do sed "s/\\r//g" $f | awk '\''BEGIN{printf "'\''$bx'\''","first series header of each variable"}NR==1||NF>2&&$2==1{print NR"\t"$0}END{print NR"\tLines Total"}'\'' > $f.map && sed "s/\\r//g" $f | awk '\''BEGIN{printf "'\''$bx'\''","first and last series header of each variable"}NR==1||NF>2{if($2==1){print r"\t"L"\n"NR"\t"$0}else{L=$0;n=$2;r=NR}}END{print NR"\tLines Total"}'\'' >> $f.map && sed "s/\\r//g" $f | awk '\''BEGIN{printf "'\''$bx'\''","full Map"}NR==1||NF>1&&$1!~/[0-9]/{print NR"\t"$0}END{print NR"\tLines Total"}'\'' >> $f.map && sed "s/\\r//g" $f | awk '\''BEGIN{printf "'\''$bx'\''","first series (full) of each variable"}NR==1;NF>2&&$2==1,NF==0;END{print NR"\tLines Total"}'\'' >> $f.map;done && ll *.map'
+alias forcmap='for f in *.forc;do sed "s/\\r//g" $f > /tmp/forc && awk '\''BEGIN{printf "'\''$bx'\''","first series header of each variable"}NR==1||NF>2&&$2==1{print NR"\t"$0}END{print NR"\tLines Total"}'\'' /tmp/forc > $f.map && awk '\''BEGIN{printf "'\''$bx'\''","first and last series header of each variable"}NR==1||NF>2{if($2==1){print r"\t"L"\n"NR"\t"$0}else{L=$0;n=$2;r=NR}}END{print NR"\tLines Total"}'\'' /tmp/forc >> $f.map && awk '\''BEGIN{printf "'\''$bx'\''","full Map"}NR==1||NF>1&&$1!~/[0-9]/{print NR"\t"$0}END{print NR"\tLines Total"}'\'' /tmp/forc >> $f.map && awk '\''BEGIN{printf "'\''$bx'\''","first series (full) of each variable"}NR==1;NF>2&&$2==1,NF==0;END{print NR"\tLines Total"}'\'' /tmp/forc >> $f.map;done && \\\rm /tmp/forc && ll *.map'
+
+################################################################################
+# Servers
+################################################################################
+## ME
+alias h09='ssh -AqtY mr@192.168.0.9'
+alias h10='ssh -AqtY mr@192.168.0.10'
+## GREX
+alias me='ssh -AqtY anssary@grex.org'
+alias me='ssh -AqtY $src0 -e "ssh -p$srcp"'
+alias me='ssh -AqtY $src0 -p$srcp'
+
+#if [[ "$src00" != "`whoami`@`hostname`" ]]; then rsync -azP $src0:~/.mr ~/.;fi
+alias kyz='if [[ "$src00" != "`whoami`@`hostname`" ]]; then rsync -azP $src0:~/.ssh/authorized_keys ~/.ssh/.;fi'
+
+#alias me2='ssh -AqtY elansarym@grex.org'
+## gDrive Download
+#alias gdrive_download='_(){ CONFIRM=$(wget --quiet --save-cookies ~/.trash/cookies.txt --keep-session-cookies --no-check-certificate "https://docs.google.com/uc?export=download&id=$1" -O- | sed -rn \'s/.*confirm=([0-9A-Za-z_]+).*/\1\n/p\');  wget --load-cookies ~/.trash/cookies.txt "https://docs.google.com/uc?export=download&confirm=$CONFIRM&id=$1" -O $2;};_'
+function gdrive_download () {
+  CONFIRM=$(wget --quiet --save-cookies ~/.trash/cookies.txt --keep-session-cookies --no-check-certificate "https://docs.google.com/uc?export=download&id=$1" -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')
+  wget --load-cookies ~/.trash/cookies.txt "https://docs.google.com/uc?export=download&confirm=$CONFIRM&id=$1" -O $2
+  del ~/.trash/cookies.txt
+}
+
+################################################################################
+## SSHFS
+alias srvx='mkdir -p $HOME/servers/x/{home,work,scratch};sshfs melans@stampede2.tacc.utexas.edu:/home1/03368/melans $HOME/servers/x/home;sshfs melans@stampede2.tacc.utexas.edu:/work/03368/melans $HOME/servers/x/work;sshfs melans@stampede2.tacc.utexas.edu:/scratch/03368/melans $HOME/servers/x/scratch;'
+alias srvz='mkdir -p $HOME/servers/z/{home,scratch};sshfs Elansary@139.94.167.106:/home/Elansary $HOME/servers/z/home;sshfs Elansary@139.94.167.106:/scratch/Elansary $HOME/servers/z/scratch;'
+
+alias reh='mkdir -p $HOME/servers/h;sshfs hat@136.243.23.230:/home/hat $HOME/servers/h;'
+
+alias reu='mkdir -p $HOME/servers/u/{home,work,scratch};sshfs elansary@cheyenne.ucar.edu:/glade/u/home/elansary $HOME/servers/u/home;sshfs elansary@cheyenne.ucar.edu:/glade/work/elansary $HOME/servers/u/work;sshfs elansary@cheyenne.ucar.edu:/glade/scratch/elansary $HOME/servers/u/scratch;'
+#alias rex='mkdir -p $CDW/servers/x/{home,work,scratch};sshfs melans@stampede2.tacc.utexas.edu:/home1/03368/melans $CDW/servers/x/home;sshfs melans@stampede2.tacc.utexas.edu:/work/03368/melans $CDW/servers/x/work;sshfs melans@stampede2.tacc.utexas.edu:/scratch/03368/melans $CDW/servers/x/scratch;'
+alias rex='mkdir -p $HOME/servers/x/{home,work,scratch};sshfs melans@stampede2.tacc.utexas.edu:/home1/03368/melans $HOME/servers/x/home;sshfs melans@stampede2.tacc.utexas.edu:/work/03368/melans $HOME/servers/x/work;sshfs melans@stampede2.tacc.utexas.edu:/scratch/03368/melans $HOME/servers/x/scratch;'
+#alias rex='sshfs melans@stampede2.tacc.utexas.edu:/work/03368/melans $HOME/servers/x/work;sshfs melans@stampede2.tacc.utexas.edu:/scratch/03368/melans $HOME/servers/x/scratch;'
+#alias rez='mkdir -p $CDW/servers/z/{home,scratch};sshfs Elansary@139.94.167.20:/home/Elansary $CDW/servers/z/home;sshfs Elansary@139.94.167.20:/scratch/Elansary $CDW/servers/z/scratch;'
+alias rey='mkdir -p $HOME/servers/y/home;sshfs Elansary@139.94.167.106:/home/Elansary $HOME/servers/y/home;'
+alias rez='mkdir -p $HOME/servers/z/{home,scratch};sshfs Elansary@139.94.167.20:/home/Elansary $HOME/servers/z/home;sshfs Elansary@139.94.167.20:/scratch/Elansary $HOME/servers/z/scratch;'
+################################################################################
+## Stampede
+alias x='ssh -AqtY melans@stampede2.tacc.utexas.edu'
+alias x0='ssh -AqtY melans@stampede.tacc.utexas.edu'
+alias x0l='x0 screen'
+alias x0ls='x0l -list'
+alias x0lx='x0l -wipe'
+alias x0x='_(){ if [ -z "$1" ]; then x0ls; else x0 screen -DRR -dLS $1 2>&1; fi;};_'
+alias xl='x screen'
+alias xls='xl -list'
+alias xlx='xl -wipe'
+alias xx='_(){ if [ -z "$1" ]; then xls; else x screen -DRR -dLS $1 2>&1; fi;};_'
+alias chisara='ssh chisaraj@stampede.tacc.utexas.edu'
+alias getx='_(){ if [ -z "$1" ]; then echo "What to get ???!!!"; else rsync -azP melans@stampede2.tacc.utexas.edu:/work/03368/melans/$1 .; fi;};_'
+alias getx0='_(){ if [ -z "$1" ]; then echo "What to get ???!!!"; else rsync -azP melans@stampede.tacc.utexas.edu:/work/03368/melans/$1 .; fi;};_'
+alias putx='_(){ if (("$#" < 2)); then echo "What to put and where ???!!!"; else rsync -azP $1 melans@stampede2.tacc.utexas.edu:/work/03368/melans/$2; fi;};_'
+alias putx0='_(){ if (("$#" < 2)); then echo "What to put and where ???!!!"; else rsync -azP $1 melans@stampede.tacc.utexas.edu:/work/03368/melans/$2; fi;};_'
+alias Q='qstat -swu $USER'
+alias q='squeue -u melans -l'
+alias qx='scancel `squeue -u melans|awk -vORS=" " "NR>2{print $1}"`'
+
+alias grib='/work/03368/melans/grib/grib2/wgrib2/wgrib2 '
+alias nsf='cd $WORK/phd/cpt/trishna;rsync -azP tchandar@stampede.tacc.utexas.edu:. .'
+alias pihm='/work/03368/melans/pihm'
+#alias rclone='$WORK/rclone/rclone'
+alias vnc='sbatch /share/doc/slurm/job.vnc'
+
+alias lstree='_(){ if [ -z "$1" ]; then f=".";else f=$1;fi;tree -DFfhpQ --timefmt "%Y-%m-%d %H:%M" -o ~/trees.htm -H `realpath $f` $f;tar czf ~/trees.htm.tgz ~/trees.htm;mail -s "Stampede tree of (`realpath $f`)" -a ~/trees.htm.tgz anssary+stampede@gmail.com</dev/null;};_ &'
+
+# CDH="/home1/03368/melans/"
+# CDS="/scratch/03368/melans/"
+# CDW="/work/03368/melans/"
+################################################################################
+## UCAR
+alias ucar='ssh -AqtY elansary@cheyenne.ucar.edu'
+# CDS='/glade/scratch/'$USER'/'
+# CDW='/glade/work/'$USER'/'
+################################################################################
+## TAMU
+alias brazos='ssh -AqtY alyismail@login.brazos.tamu.edu'
+################################################################################
+## TAMUK
+alias hydro='ssh -AqtY elan@10.133.224.26'
+alias mac='ssh -AqtY Tamuk_Mac_Lee_1@Youngs-iMac-4.local'
+alias getmac='_(){ if [ -z "$1" ]; then echo "What to get ???!!!"; else rsync -azP Tamuk_Mac_Lee_1@Youngs-iMac-4.local:/Users/Tamuk_Mac_Lee_1/Desktop/ElansaryM/$1 .; fi;};_'
+alias putmac='_(){ if (("$#" < 2)); then echo "What to put and where ???!!!"; else rsync -azP $1 Tamuk_Mac_Lee_1@Youngs-iMac-4.local:/Users/Tamuk_Mac_Lee_1/Desktop/ElansaryM/$2; fi;};_'
+
+alias y='ssh -AqtY Elansary@139.94.167.106'
+alias yl='y screen'
+alias yls='yl -list'
+alias ylx='yl -wipe'
+alias yy='_(){ if [ -z "$1" ]; then yls; else y screen -DRR -dLS $1 2>&1; fi;};_'
+alias gety='_(){ if [ -z "$1" ]; then echo "What to get ???!!!"; else rsync -azP Elansary@139.94.167.106:/home/Elansary/$1 .; fi;};_'
+alias getz='_(){ if [ -z "$1" ]; then echo "What to get ???!!!"; else rsync -azP Elansary@139.94.167.20:/home/Elansary/$1 .; fi;};_'
+
+alias z='ssh -AqtY Elansary@139.94.167.20'
+alias zl='z screen'
+alias zls='zl -list'
+alias zlx='zl -wipe'
+alias zz='_(){ if [ -z "$1" ]; then zls; else z screen -DRR -dLS $1 2>&1; fi;};_'
+alias puty='_(){ if (("$#" < 2)); then echo "What to put and where ???!!!"; else rsync -azP $1 Elansary@139.94.167.106:/home/Elansary/$2; fi;};_'
+alias putz='_(){ if (("$#" < 2)); then echo "What to put and where ???!!!"; else rsync -azP $1 Elansary@139.94.167.20:/home/Elansary/$2; fi;};_'
+################################################################################
+## BBRG
+alias bb0='ssh baffinbayrodgun@bh-40.webhostbox.net'
+alias bb1='ssh -AqtY baffinb1@box928.bluehost.com'
+alias bb1='ssh baffinb1@box928.bluehost.com'
+alias bbrg='ssh baffinb1@69.195.124.128'
+alias bb='ssh u454-k3h7czhzdmhj@giow1024.siteground.us -p18765'
+alias bbg='ssh u454-k3h7czhzdmhj@giow1024.siteground.us -p18765'
+alias bbf='ssh u685-un969cwb9jmd@giow1056.siteground.us -p18765'
+#alias keap_duplicates='_(){ sed '\''s/\r//g'\'' "$1"|awk -F, '\''{x[$1" "$2]++;y[$1" "$2]=$13","y[$1" "$2]}END{for(i in x)if(x[i]>1)print x[i],i,y[i]}'\''|sort -rnk1>"$1.duplicates";echo "$1.duplicates";};_'
+################################################################################
+## HAT
+alias hatx='ssh -AqtYp 18765 u401-9avn57jxz9nw@healthatec.com'
+alias hat='gcloud beta compute --project "healthatec-174706" ssh --zone "us-central1-a" "instance-1"'
+alias hat='ssh -AqtY healtha@45.33.92.81 screen -dRR 2>&1'
+alias hat='ssh -AqtYp 18765 u401-9avn57jxz9nw@healthatec.com'
+alias hat='ssh anssary@35.224.43.9'
+alias hat0='ssh -AqtYp 18765 u401-9avn57jxz9nw@giow1062.siteground.us'
+alias hat='ssh -AqtY hat@136.243.23.230'
+alias shat='ssh  -AqtY ansary@136.243.23.254'
+alias w='cd /home/hat/www/www.healthatec.com/www'
+################################################################################
+## misc
+alias web='ssh -AqtYp 2222 s2x7u5y1@162.144.18.74'
+alias sites='ssh -p 2222 sitesrentals@192.185.42.2'
+alias abs='ssh u553-9thf9pwhph4r@abso-fishing-lutely.com -p18765'
+alias elan='ssh -AqtY elan@139.94.165.223'
+alias mecloud='gcloud alpha cloud-shell ssh --project me-shell'
+alias bbsh='gcloud alpha cloud-shell ssh'
+alias mecloud='gcloud alpha cloud-shell ssh --ssh-flag="-Y" --project me-shell'
+alias usa='ssh -AqtY u970-vde62o6xaslo@usaandcanadajobs.com -p18765'
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+# PS1='\[\033[01;32m\]\#.\!.\D{%y%m%d.%H%M%S} \[\033[01;33m\]\u@\h\[\033[00m\] \[\033[01;32m\]\w \$\[\e[0m\] '
+# PS1='\[\033[01;33m\]\#.\!.\D{%y%m%d.%H%M%S} \[\033[01;97m\]\u@\h\[\033[00m\] \[\033[01;36m\]\w \$\[\e[0m\] '
+# PS1='\[\033[01;92m\]\#.\!.\D{%y%m%d.%H%M%S} \[\033[01;33m\]\u@\h\[\033[00m\] \[\033[01;36m\]\w \$\[\033[01;97m\] '
+# PS1='\[\033[01;97m\]\#.\!.\D{%y%m%d.%H%M%S} \[\033[01;33m\]\u@\h\[\033[00m\] \[\033[01;36m\]\w \$\[\033[01;97m\] '
+# PS1='\[\033[01;97m\]\#.\!.\D{%y%m%d.%H%M%S} \[\033[01;33m\]\u@\h\[\033[00m\] \[\033[01;36m\]\w \$\[\e[0m\] '
+# . ~/.bash_aliases
+#
+# # drush
+# #alias dh='d @hat '
+# #alias dls0='_(){ if [[ -z "$1" ]] ; then x="less"; else x="grep $1"; fi; d pm-list|egrep "Disabled|Not installed"|$x;};_'
+# #alias dls1='_(){ if [[ -z "$1" ]] ; then x="less"; else x="grep $1"; fi; d pm-list|egrep "Enabled"|$x;};_'
+# #alias duph='dh -y up drupal;dh -y upc;dh -y updb;'
+# alias 2usb='_(){ sudo dd if=$1 of=/dev/sdc;beep;};_'
+# alias d='drush'
+# alias dc='echo 2|d cache-clear'
+# alias dd='_(){ while [ $# != 0 ] ; do dl -y $1; den $1; shift; done;};_'
+# alias den='d -y en'
+# alias dis='d -y dis'
+# alias dl='d -y dl'
+# alias dlang='d l10n-update-refresh;d l10n-update --mode=overwrite'
+# alias dll='d pml|grep '
+# alias dls='d pml|less'
+# alias dls0='_(){ if [[ -z "$1" ]] ; then x="less"; else x="grep $1"; fi; d pml --status="disabled,not installed"|$x;};_'
+# alias dls1='_(){ if [[ -z "$1" ]] ; then x="less"; else x="grep $1"; fi; d pml --status="enables"|$x;};_'
+# alias dme='dis overlay toolbar shortcut comment;dl -y module_filter admin_menu advanced_help;den admin_menu_toolbar module_filter advanced_help;d vset admin_theme seven;'
+# alias dnew='mkdir -m 777 sites/default/files;cp sites/default/default.settings.php sites/default/settings.php;chmod 666 sites/default/settings.php;'
+# alias dperms='d php-eval "node_access_rebuild();"'
+# alias dstng='chmod 644 sites/default/settings.php;nano sites/default/settings.php;chmod 444 sites/default/settings.php;'
+# alias dup='d -y up drupal;d -y upc;d -y updb'
+# alias pycharm='/opt/pycharm-community-2017.3.3/bin/pycharm.sh '
+# alias rm='_(){ if [ `hostname -d` = stampede2.tacc.utexas.edu ]; then trash="/work/03368/melans/.trash";else trash="~/.trash";fi;mkdir $trash;mv --verbose -f --backup=numbered --target-directory $trash};_';
+# alias rm='mkdir -p ~/.trash;mv --verbose -f --backup=numbered --target-directory ~/.trash'
+# alias ttl='_(){ printf "%.0s=" {1..80};echo "> $1";};_'
+# alias uu='sudo apt update;sudo apt -f install -y;sudo apt upgrade -y --allow-downgrades;sudo apt dist-upgrade -y --allow-downgrades;sudo apt autoremove -y;sudo apt autoclean -y'
+# alias win='wine explorer /desktop=melans gta-vc.exe -- -opengl'
+# apt update && apt install -y build-essential && apt upgrade -y && apt dist-upgrade -y && apt autoremove -y && apt autoclean -y
+# AWK
+# bash backup
+# cd && git clone https://github.com/andreafrancia/trash-cli.git && cd trash-cli && python setup.py install --user
+# CV & RP version
+# drush
+# echo '. ~/.bash_aliases'>>/home/$username/.bashrc
+# echo "%sudo ALL=(ALL) NOPASSWD:ALL">>/etc/sudoers
+# fix permissions
+# http://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html
+# pkill -u $username
+# Remote machines
+# RP only version
+# sed -i 's/[1000|2000]//g' /home/$username/.bashrc
+# Servers
+# Servers - X
+# Servers - X0
+# Servers - Y
+# Servers - Z
+# ssh
+# SSH - BBR&G
+# SSH - TAMUK
+# SSH - Web
+# sudo usermod -aG sudo $username
+# system
+# System
+# trees
+# username='`whoami`'
+# wine - windows
+# xrandr --output XWAYLAND0 --rotate normal
+# xrandr -o normal
+#;cd ~/tamuk/phd/spsm/11.03;./CPT.x < $cptfile > $cptfile.out;cd -;};_'
+###################################################
+#alias bkp="nohup bash ~/bkp &"
+#alias chrome64='sudo sed -i -e "s/deb http/deb [arch=amd64] http/" /etc/apt/sources.list.d/google-chrome.list'
+#alias cpt='_(){ sed -e{3,11,31,39}'s%.*%'`realpath .`'/%g' $1;cptfile=`realpath $1`;};_'
+#alias cpt='_(){ sed -e{3,11,31,39}'s%.*%'`realpath .`'/$1%' $1;}_;'
+#alias cpt='_(){ sed -i 's_CURRENTPATH_'`realpath .`'_g' $1;cptfile=`realpath $1`;cd ~/tamuk/phd/spsm/11.03;./CPT.x < $cptfile > $cptfile.out;cd -;};_'
+#alias crn='while :;do d cron;sleep 10;done'
+#alias dd='_(){  while [ $# != 0 ] ; do dl -y $1; den $1; shift; done;};_'
+#alias dd='_(){ while [ $# != 0 ] ; do dl -y $1; den $1; shift; done;};_'
+#alias dd='sudo dd status=progress '
+#alias del=`mv "$@" ~/.trash`
+#alias df='d @fouda '
+#alias dh='d @hat '
+#alias dls0='_(){ if [[ -z "$1" ]] ; then x="less"; else x="grep $1"; fi; d pm-list|egrep "Disabled|Not installed"|$x;};_'
+#alias dls1='_(){ if [[ -z "$1" ]] ; then x="less"; else x="grep $1"; fi; d pm-list|egrep "Enabled"|$x;};_'
+#alias dupf='df -y up drupal;df -y upc;df -y updb;'
+#alias elan='ssh -AqtY elan@139.94.164.172'
+#alias elan='ssh -AqtY elan@elan.engineering.tamuk.edu'
+#alias elmak='ssh -AqtY elmak@139.94.164.161'
+#alias elmak='ssh -AqtY elmak@elmak.engineering.tamuk.edu'
+#alias fouda='ssh -AqtY melans@fouda.com screen -dRR 2>&1'
+#alias fouda='ssh melans@fouda.com'
+#alias getm='_(){ if [ -z "$1" ]; then t=10; else t=$1; fi; find ~/Downloads/* -mmin -$t -exec mv --backup=numbered -t . {} + ;};_'
+#alias gtm='_(){ if [ -z "$1" ]; then t=10; else t=$1; fi; find ~/Downloads/* -mmin -$t -exec mv --backup=numbered -t . {} + ;};_'
+#alias hat='ssh healtha@healthatec.com'
+#alias inst='sudo apt-get install -y '
+#alias lll='cd ~/aws;ssh -i "mr.pem" ec2-user@ec2-54-186-236-245.us-west-2.compute.amazonaws.com'
+#alias lt='ll -t '
+#alias lt='ll -tr '
+#alias M='vlc /home/melans/Music'
+#alias march='ssh -AqtY elan@139.94.164.17'
+#alias march='ssh -AqtY elan@march.engineering.tamuk.edu'
+#alias melans='ssh melans@139.94.164.227'
+#alias pdfx='wine ~/PDFX/PDFXEdit.exe &'
+#alias pycharm='/opt/pycharm-community-2017.3.3/bin/pycharm.sh '
+#alias qeget='qe/..;gdrive sync download 0B5Mgz3oglh_xanUxSGcxMC1HN0U ~/tamuk/phd/QE'
+#alias R='~/R/R'
+#alias R='$WORK/R/bin/R '
+#alias r="wc -lw {.,*}/*.rivFlx1|awk '{print \$1,\$2/\$1, FILENAME}'"
+#alias rclone='~/rclone/rclone'
+#alias restore='nohup rsync -azP /scratch/Elansary/* elan@139.94.164.161:/home/elan/oldhp/. & '
+#alias restore='rsync -azP /scratch/Elansary/* elan@139.94.164.161:/home/elan/oldhp/. '
+#alias restore='rsync -azP Elansary@139.94.167.20:/scratch/Elansary/* /home/elan/oldhp/. '
+#alias restore='rsync -azP Elansary@139.94.167.20:/scratch/Elansary/* elan@139.94.164.161:/home/elan/oldhp/. '
+#alias rm=`mv "$@" ~/.trash`
+#alias Rscript='~/R/Rscript'
+#alias Rscript='$WORK/R/bin/Rscript '
+#alias rst='sudo service apache2 reload;sudo systemctl restart apache2;sudo /etc/init.d/apache2 restart;'
+#alias rvr='wc -l {.,*}/*.rivFlx1'
+#alias sql='mysql -uroot -pr00t'
+#alias tmux='tmux attach'
+#alias trees='_(){ if [ -z "$1" ]; then f=".";else f=$1;fi;tree -DFhpQ --timefmt "%Y-%m-%d %H:%M" -o ~/trees.htm -H `realpath $f` $f;echo file://`realpath ~/trees.htm`;};_'
+#alias tstml='_(){ c=`realpath $1`;y=${c#*.};y=`echo ${y/./-1+}|bc`;y=`printf "%02d" $y`;echo $y;};_'
+#alias tstml='_(){ c=`realpath $1`;y=${c#*.};y=`printf "%02d" ${y/./-1+}|bc`;echo $y;};_'
+#alias tstml='_(){ y=${1#*.};y=${y/./-1+};y=`echo $y|bc`;y=`printf "%02d" $y`;echo $y;};_'
+#alias uu='chrome64;sudo apt-get update;sudo apt-get install -fy;sudo apt-get upgrade -y;sudo apt-get autoremove -y;sudo apt-get autoclean -y'
+#alias uu='sudo apt-get update;sudo apt-get -f install -y;sudo apt-get upgrade -y;sudo apt-get autoremove -y;sudo apt-get autoclean -y;sudo aptitude purge -y ~c ~o'
+#alias uuu='fouda;hat;uux'
+#alias uuu='hat;uux'
+#alias uuu='sudo apt-get update;sudo apt-get upgrade -y;sudo apt-get dist-upgrade -y;sudo apt-get autoremove -y;sudo apt-get autoclean -y'
+#alias uuu='uu;ttl healthatec;ssh healtha@healthatec.com "cd /var/www/html/healthatec.com/public_html;sudo apt-get update;sudo apt-get install -f -y;sudo apt-get upgrade -y;sudo apt-get autoclean -y;sudo apt-get autoremove -y;drush -y up drupal;drush -y upc;drush -y updb";'
+#alias uuu='uu;ttl healthatec;ssh healtha@healthatec.com "cd /var/www/html/healthatec.com/public_html;sudo apt-get update;sudo apt-get install -f -y;sudo apt-get upgrade -y;sudo apt-get autoclean -y;sudo apt-get autoremove -y;drush -y up drupal;drush -y upc;drush -y updb";ttl fouda;ssh melans@fouda.com "cd /var/www/fouda.com/public_html;sudo apt-get update;sudo apt-get install -f -y;sudo apt-get upgrade -y;sudo apt-get autoclean -y;sudo apt-get autoremove -y;drush -y up drupal;drush -y upc;drush -y updb"'
+#alias uuu='uu;ttl healthatec;ssh healtha@healthatec.com "cd /var/www/html/healthatec.com/public_html;sudo apt-get update;sudo apt-get install -f -y;sudo apt-get upgrade -y;sudo apt-get autoclean -y;sudo apt-get autoremove -y;drush -y up drupal;drush -y upc;drush -y updb"'
+#alias uux='chrome64;sudo apt-get update;sudo apt-get install -f -y;sudo apt-get upgrade -y;sudo apt-get autoclean -y;sudo apt-get autoremove -y;exit;'
+#alias uux='uu;exit'
+#alias vnc="_(){ssh -q melans@stampede.tacc.utexas.edu "sbatch /share/doc/slurm/job.vnc;tail -n 1 vncserver.out"|awk -F:: 'END{print $NF}'`;ssh -f -N -L $vncport:stampede.tacc.utexas.edu:$vncport melans@stampede.tacc.utexas.edu;};_"
+#alias wget='wget -c'
+#alias win='wine explorer /desktop=melans gta-vc.exe -- -opengl'
+#alias xxx='_(){ x=(-z "$1")?"basins ":$1; ssh -AqtY melans@stampede.tacc.utexas.edu screen -dLRRS $1 2>&1;};_'
+#alias xxx='_(){ x=${1:-basins}; ssh -AqtY melans@stampede.tacc.utexas.edu screen -dLRRS $1 2>&1;};_'
+#alias xxx='_(){ x=${1:-basins}; ssh -AqtY melans@stampede.tacc.utexas.edu screen -dLRRS $x 2>&1;};_'
+#cd ~/www/healthatec.com/public_html
+#cd ~/www/www.healthatec.com/www
+#echo $(ps -aux|grep proxi|awk -vORS=   '{print $2}')
+#echo $(ps -aux|grep proxi|awk -vORS= '{print $2}')
+#echo 26580
+#echo 26668
+#export PROMPT_COMMAND='hpwd=$(history 1); hpwd="${hpwd# *[0-9]*  }"; if [[ ${hpwd%% *} == "cd" ]]; then cwd=$OLDPWD; else cwd=$PWD; fi; hpwd="${hpwd% ### *} ### $cwd"; history -s "$hpwd"'
+#export PROMPT_COMMAND='hpwd=$(history 1); hpwd="${hpwd# *[0-9]* }"; if [[ ${hpwd%% *} == "cd" ]]; then cwd=$OLDPWD; else cwd=$PWD; fi; hpwd="${hpwd% ### *} ### $cwd"; history -s "$hpwd"'
+#gtm(){ if [ -z "$1" ]; then t=10; else t=$1; fi; find ~/Downloads/* -mmin -$t -exec mv --backup=numbered -t . {} + ;}
+#HISTTIMEFORMAT='%y%m%d.%H%M%S {'$(pwd)'} => '
+#HISTTIMEFORMAT='%y%m%d.%H%M%S => '
+#if [ $# -eq 0 ]; then
+#if [[ $1 ]];then
+#ssh -q melans@stampede.tacc.utexas.edu "tail -n 1 vncserver.out"|awk -F:: '{print $NF}'
+#ssh melans@stampede.tacc.utexas.edu 'sbatch /share/doc/slurm/job.vnc'
+#tmux a
+#tmux attach||tmux new
+#vnc=`ssh -q melans@stampede.tacc.utexas.edu "tail -n 1 vncserver.out"|sed "s/.*:://g"`
+#vncport="ssh -q melans@stampede.tacc.utexas.edu 'sbatch /share/doc/slurm/job.vnc;tail -n 1 vncserver.out'|awk -F:: 'END{print $NF}'";echo $vncport
+#vncport=`ssh -q melans@stampede.tacc.utexas.edu "sbatch /share/doc/slurm/job.vnc;tail -n 1 vncserver.out"|awk -F:: 'END{print $NF}'`;echo $vncport
+# alias g='ping google.com'
+# alias 2usb='_(){ sudo dd if=$1 of=/dev/sdc;beep;};_'
+# alias atom='/work/03368/melans/atom/atom '
+# alias atom='~/atom/atom '
+# alias cd..='cd ..'
+# alias cds='cd /scratch/Elansary'
+# alias cds='cd $CDS'
+# alias cdw='cd $CDW'
+# alias cdxh='cd $HOME/servers/x/home'
+# alias cdxs='cd $HOME/servers/x/scratch'
+# alias cdxw='cd $HOME/servers/x/work/stampede2'
+# alias chrome64='sudo sed -i -e "s/deb http/deb [arch=amd64] http/" /etc/apt/sources.list.d/google-chrome.list'
+# alias cpt='_(){ c=`realpath $1`; sed -i -e{3,11,31,39}'s%.*%'$c'%' -e '3s%cpt.%X.%' -e '11s%cpt.%Y.%' -e '11s%.[0-9]*$%%' -e '31s%cpt.%CV.%' -e '39s%cpt.%RP.%' $1; cd ~/tamuk/phd/spsm/11.03;./CPT.x < $c > $c.out;cd -; };_'
+# alias cpt='_(){ cpt0 $1; cat $c;};_'
+# alias cpt0='_(){ c=`realpath $1`; r=$[`wc -l<$1`-2]; y=${1#*.};y=${y/./-1+};y=`echo $y|bc`;y=`printf "%02d" $y`; sed -i -e{3,11,${r}}'s%.*%'$c'%' -e '3s%cpt*.%X.%' -e '11s%cpt*.*$%Y.'$y'%' -e ${r}'s%cpt*.%RP.%' $1; };_'
+# alias cptx='_(){ c=`realpath $1`; y=${1#*.};y=${y/./-1+};y=`echo $y|bc`;y=`printf "%02d" $y`; sed -i -e{3,11,33}'s%.*%'$c'%' -e '3s%cpt*.%X.%' -e '11s%cpt*.*$%Y.'$y'%' -e '33s%cpt*.%RP.%' $1; cd ~/tamuk/phd/spsm/11.03;./CPT.x < $c > $c.out;cd -; };_'
+# alias cptx='_(){ cpt0 $1;cd ~/tamuk/phd/spsm/11.03;./CPT.x < $c > $c.out;cd -;};_'
+# alias crn='while :;do d cron;sleep 10;done'
+# alias findme='_(){ nohup find /work/03368/melans -iname "*$1*" -printf "%T+ %p\n"|sort -rnk1|mail -s "find /work/03368/melans -iname "*$1*.*" -printf "%T+ %p\n"|sort -rnk1" anssary@gmail.com &};_'
+# alias getw='_(){ if [ -z "$1" ]; then echo "please enter a url to download"; else w=(${1//\// }); wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains ${w[1]} --no-parent $1; fi;};_'
+# alias grib='/work/03368/melans/grib/grib2/wgrib2/wgrib2 '
+# alias grib='~/grib/grib2/wgrib2/wgrib2 '
+# alias grib='~/tamuk/phd/grib/grib2/wgrib2/wgrib2'
+# alias gtm='_(){ if [ -z "$1" ]; then t=10; else t=$1; fi; find ~/Downloads/* -mmin -$t -exec mv --backup=numbered -t . {} + ;};_'
+# alias kl='_(){ if [ ! -z "$1" ]; then kill -9 $(ps aux|grep $1|head -1|awk -vORS=" " '\''{print $2}'\''); fi;};_'
+# alias lstree='_(){ if [ -z "$1" ]; then f=".";else f=$1;fi;tree -DFfhpQ --timefmt "%Y-%m-%d %H:%M" -o ~/trees.htm -H `realpath $f` $f;tar czf ~/trees.htm.tgz ~/trees.htm;mail -s "Stampede tree of (`realpath $f`)" -a ~/trees.htm.tgz anssary+stampede@gmail.com</dev/null;};_ &'
+# alias lt='_(){ if [ -z "$1" ]; then f=".";else f=$1;fi;tree -DFfhpQ --timefmt "%Y-%m-%d %H:%M" $f ;};_'
+# alias M='vlc /home/melans/Music'
+# alias megit='_(){ git add .;git commit -a -m "`date` : $1";git push;};_'
+# alias nsf='cd $WORK/phd/cpt/trishna;rsync -azP tchandar@stampede.tacc.utexas.edu:. .'
+# alias off='systemctl hibernate -i'
+# alias pdfx='wine ~/PDFX/PDFXEdit.exe &'
+# alias pihm='/home/Elansary/pihm '
+# alias pihm='/work/03368/melans/pihm'
+# alias pihm='~/tamuk/PIHM.run/pihm '
+# alias r="wc -l */*x1|awk '\$1>=2*365'|sort -nr"
+# alias rclone='$WORK/rclone/rclone'
+# alias restore='rsync -azP Elansary@139.94.167.20:/scratch/Elansary/* /home/elan/oldhp/. '
+# alias rvr="find . -name *.rivFlx1 -print0|xargs -0 wc -lw|awk '{if(\$1>0)print \$1,\$2/\$1,\"\\t\",\$3}'"
+# alias spsm='cd ~/tamuk/phd/spsm3'
+# alias tmux='tmux a '
+# alias treeps='_(){ if [ -z "$1" ]; then echo "Usage: treeps <process name>"; else watch -n.1 ps f -g`ps eo ppid -C $1 --no-header`; fi;};_'
+# alias tst='bash ~/PIHM/2018_2019/uNueces/1hrTst/tst'
+# alias ttl='_(){ printf "%.0s=" {1..80};echo "> $1";};_'
+# alias vnc='sbatch /share/doc/slurm/job.vnc'
+# alias wget='wget -c'
+# CDXH="$HOME/servers/x/home"
+# CDXS="$HOME/servers/x/scratch"
+# CDXW="$HOME/servers/x/work/stampede2"
+# mkcd(){ mkdir "$1" && cd "$1"; }
+# module load nano tmux R rstudio
